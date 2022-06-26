@@ -1,11 +1,17 @@
 import axios from "axios";
 import { NFT_PORT_KEY } from "./constants";
 
+async function loadImage(url) {
+  const config = { url, method: "get", responseType: "blob" }
+  const response = await axios.request(config)
+  return response.data // the blob
+}
+
 export const createNFT = async (
   name,
   description,
   ownerAddress,
-  imageData
+  imageUrl
 ) => {
   const params = {
     chain: "polygon",
@@ -15,8 +21,11 @@ export const createNFT = async (
   };
 
   const formData = new FormData();
+  // Default to celebration image nft
+  const url = imageUrl || 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Celebration_fireworks.jpg'
+  
   // https://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
-  const blob = await (await fetch(imageData || 'https://images.emojiterra.com/google/android-10/512px/1f389.png')).blob();
+  const blob = await loadImage(url)
   const file = new File([blob], "donation.jpg", {
     type: "image/jpeg",
     lastModified: new Date(),

@@ -13,11 +13,10 @@ import CreateListing from "./components/CreateListing";
 
 import "./App.css";
 import FundPage from "./components/FundPage";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import { web3ModalSetup } from "./context/web3ModalSetup";
-import { initWeb3 } from "./util/web3util";
 import ConversationList from "./components/ConversationList";
+import { capitalize } from "./util";
 
 const { Header, Content, Footer } = Layout;
 
@@ -106,6 +105,9 @@ function App() {
                 </Menu.Item>} */}
                 <Menu.Item key={3} onClick={() => navigate("/history")}>
                   View fundraise history
+                </Menu.Item>
+                <Menu.Item className="float-right">
+                  ({capitalize(ACTIVE_CHAIN.name)})
                 </Menu.Item>
               </>
             )}

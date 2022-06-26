@@ -78,6 +78,7 @@ To run/demo the project locally, Worldfund requires the following environment va
     REACT_APP_COVALENT_KEY={YOUR_COVALENT_API_KEY} # Covalent key for the history page.
     REACT_APP_NFT_PORT_KEY={YOUR_NFT_PORT_API_KEY} # NFT port api key for receipt creation.
     REACT_APP_STORAGE_KEY={YOUR_WEB3_STORAGE_KEY} # web3.storage key for file hosting.
+    REACT_APP_INFURA_ID={YOUR INFURA ID} # Your Infura RPC ID
 </pre>
 
 ---
@@ -93,6 +94,41 @@ Recompiling Worldfund contract:
 #### Home page
 
 <img src="./img/home.png" width=800 />
+
+#### Fundraise page
+
+<img src="./img/home.png" width=800 />
+
+
+#### Creating a new page
+
+<img src="./img/create.png" width=800 />
+
+
+#### Deploying a contract to polygon
+
+<img src="./img/deploy.png" width=800 />
+
+
+#### Assets get hosted to IPFS automatically for each page.
+
+<img src="./img/ipfs.png" width=800 />
+
+#### Validating with world id
+
+<img src="./img/home.png" width=800 />
+
+
+#### Example deployed contract with transactions
+
+<img src="./img/transaction.png" width=800 />
+
+#### Starting a conversation with a Worldfund page owner
+
+<img src="./img/conversation.png" width=800 />
+
+
+
 
 ### Useful links
 * Sponsors: https://showcase.ethglobal.com/ethnewyork2022/prizes

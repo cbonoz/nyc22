@@ -5,15 +5,10 @@ export const NFT_PORT_KEY = process.env.REACT_APP_NFT_PORT_KEY; // nft port key
 
 // Flag.
 export const USE_IPFS = true || process.env.REACT_APP_USE_IPFS;
-export const USE_WORLD = true || process.env.REACT_APP_USE_WORLD;
+export const USE_WORLD = false || process.env.REACT_APP_USE_WORLD;
 
 export const APP_NAME = "Worldfund";
 export const APP_DESC = "Create human-verified fundraise pages hosted on web3"
-
-export const MUMBAI_RPC = process.env.REACT_APP_MUMBAI ||  "https://rpc-mumbai.matic.today"
-
-export const RPC_ID = process.env.REACT_APP_INFURA_ID
-export const RPC_URL = process.env.REACT_APP_RPC_URL || 'https://rpc-matic.mumbai.today'
 
 export const CONVOS = [
   "0xFc62E94af9aBd25a1D7abfe00F7034Cf154BbBD9",
@@ -35,33 +30,39 @@ export const HISTORY_COLUMNS = [
   ),
 ];
 
+export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
+
+export const getInfuraUrl = (baseUrl) => `${baseUrl}/${INFURA_ID}`
 
 export const CHAIN_OPTIONS = {
   80001: {
     name: "Mumbai",
     url: "https://mumbai.polygonscan.com/",
-    rpcUrl: MUMBAI_RPC,
+    rpcUrl: getInfuraUrl("https://polygon-mumbai.infura.io/v3"),
     id: 80001,
   },
   137: {
     name: "Matic Mainnet",
     url: "https://polygonscan.com/",
-    rpcUrl: process.env.REACT_APP_RPC_URL || 'https://matic-mumbai.chainstacklabs.com',
+    rpcUrl: getInfuraUrl("https://polygon-mainnet.infura.io/v3"),
     id: 137,
   },
+  42: { 
+    name: "kovan", url: "https://kovan.etherscan.io/", id: 42, rpcUrl: getInfuraUrl("https://kovan.infura.io/v3")
+ },
 };
 
 export const CHAIN_IDS = Object.keys(CHAIN_OPTIONS)
 
 // 1: { name: "ethereum", url: "https://etherscan.io/tx/", id: 1 },
-// 42: { name: "kovan", url: "https://kovan.etherscan.io/tx/", id: 42 },
 // 4: { name: "rinkeby", url: "https://rinkeby.etherscan.io/tx/", id: 4 },
 
-export const ACTIVE_CHAIN = CHAIN_OPTIONS["80001"];
+
+export const ACTIVE_CHAIN = CHAIN_OPTIONS["42"]; // Specify active chain
 
 
 export const CATEGORIES = [
-  "Community", "Environment", "BUsiness", "Competition", "Creative", "Event", "Faith", "Family", "Travel", "Volunteer", "Medical", "Education", "Gift", "Other"
+  "Community", "Environment", "Business", "Competition", "Creative", "Event", "Faith", "Family", "Travel", "Volunteer", "Medical", "Education", "Gift", "Other"
 ]
 
 export const EXAMPLE_FORM = {
@@ -74,8 +75,7 @@ export const EXAMPLE_FORM = {
 };
 
 
-export const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 
 export const IPFS_BASE_URL = "https://ipfs.io/ipfs"
 
-console.log("config", COVALENT_KEY, NFT_PORT_KEY, ACTIVE_CHAIN, MUMBAI_RPC);
+console.log("config", COVALENT_KEY, NFT_PORT_KEY, ACTIVE_CHAIN, INFURA_ID);

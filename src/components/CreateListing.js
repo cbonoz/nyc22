@@ -89,7 +89,7 @@ function CreateListing({provider, account}) {
 
       // 3) return shareable url.
       res["campaignUrl"] = campaignUrl(cid);
-      res["contractUrl"] = getExplorerUrl(res.address);
+      res["contractUrl"] = getExplorerUrl(res.address, false);
 
       // Result rendered after successful doc upload + contract creation.
       setResult(res);
