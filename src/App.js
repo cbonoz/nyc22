@@ -107,7 +107,7 @@ function App() {
                   View fundraise history
                 </Menu.Item>
                 <Menu.Item className="float-right">
-                  ({capitalize(ACTIVE_CHAIN.name)})
+                  Active network: ({capitalize(ACTIVE_CHAIN.name)})
                 </Menu.Item>
               </>
             )}

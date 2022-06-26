@@ -114,7 +114,7 @@ Recompiling Worldfund contract:
 
 #### Deploying a contract to polygon
 
-<img src="./img/deploy.png" width=800 />
+<img src="./img/deployed.png" width=800 />
 
 
 #### Assets get hosted to IPFS automatically for each page.
@@ -123,12 +123,12 @@ Recompiling Worldfund contract:
 
 #### Validating with world id
 
-<img src="./img/home.png" width=800 />
+<img src="./img/world_done.png" width=800 />
 
 
 #### Example deployed contract with transactions
 
-<img src="./img/transaction.png" width=800 />
+<img src="./img/transactions.png" width=800 />
 
 #### Starting a conversation with a Worldfund page owner
 
