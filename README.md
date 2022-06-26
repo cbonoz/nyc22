@@ -100,7 +100,7 @@ Recompiling Worldfund contract:
 
 #### Fundraise page
 
-<img src="./img/home.png" width=800 />
+<img src="./img/fund.png" width=800 />
 
 
 #### Creating a new page
