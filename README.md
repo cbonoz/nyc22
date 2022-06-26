@@ -109,7 +109,7 @@ Recompiling Worldfund contract:
 
 #### Using WalletConnect to authorize a transaction from a mobile wallet
 
-<img src="./img/wc.png" width=800 />
+<img src="./img/wc.png" width=400 />
 
 
 #### Deploying a contract to polygon
