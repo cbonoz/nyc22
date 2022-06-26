@@ -130,6 +130,9 @@ textarea {
 .header-logo {
   height: 40px;
 }
+.gray {
+  background: #eee;
+}
 
 .ant-layout-header {
   background: white;

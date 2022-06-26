@@ -49,14 +49,15 @@ function CreateListing({provider, account}) {
       return;
     }
 
-    if (USE_WORLD && data.worldId.proof) {
-      setError("World ID proof is required to continue")
-      return
-    }
 
     if (!freeze && USE_WORLD) {
       setError("Title must be frozen");
       return;
+    }
+
+    if (USE_WORLD && !data.worldId.proof) {
+      setError("World ID proof is required to continue")
+      return
     }
 
     setLoading(true);

@@ -120,7 +120,7 @@ export default function ConversationList({provider, account}) {
                 <br/>
             <h3>Your conversations</h3>
             {conversations && conversations.map((c, i) => {
-                return <div className='cbox' onClick={() => navigate('/conversations/' + c)} key={i}>{c}</div>
+                return <div className={`cbox ${address == c ? 'gray': ''}`} onClick={() => navigate('/conversations/' + c)} key={i}>{c}</div>
 
             })}
 

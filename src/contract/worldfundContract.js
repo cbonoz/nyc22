@@ -56,7 +56,7 @@ export const submitPayment = async (provider, contractAddress, amount, message, 
   );
   const options = {value: ethers.utils.parseEther(amount)}
   let result = {}
-  // result = await worldfundContract.donate(message || '', options);
+  result = await worldfundContract.donate(options);
   const title = "New donation!"
 
   const tx = await sendNotification({recipientAddress: owner, title, message: message || title, cta: window.location.href})

@@ -17,7 +17,7 @@ contract Worldfund is Ownable {
 
     bool active;
 
-    event Donated(address donater, uint amount);
+    event Donated(address donater, uint amount, string memory message);
 
     constructor(string memory _title, 
                 string memory _description, 

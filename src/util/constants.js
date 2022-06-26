@@ -5,7 +5,7 @@ export const NFT_PORT_KEY = process.env.REACT_APP_NFT_PORT_KEY; // nft port key
 
 // Flag.
 export const USE_IPFS = true || process.env.REACT_APP_USE_IPFS;
-export const USE_WORLD = false || process.env.REACT_APP_USE_WORLD;
+export const USE_WORLD = true || process.env.REACT_APP_USE_WORLD;
 
 export const APP_NAME = "Worldfund";
 export const APP_DESC = "Create human-verified fundraise pages hosted on web3"
@@ -24,8 +24,9 @@ export const CONVOS = [
 export const BASE_CONVO= []
 
 export const HISTORY_COLUMNS = [
-  col("tx_hash"),
+  col("tx_hash", (row) => `${row.substr(0, 6)}**`),
   col("from_address"),
+  col("value"),
   col("block_signed_at",
     (row) =>
       `${new Date(row).toLocaleDateString()} ${new Date(

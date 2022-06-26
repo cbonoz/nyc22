@@ -208,9 +208,10 @@ console.log('rows', rows)
           <Button type="secondary" onClick={share}> Share <ShareAltOutlined/> </Button>
           </h3>
           <hr/>
-            {data.createdAt && <span>{getDateStringFromTimestamp(data.createdAt)}</span>} | <span>
-            <TagOutlined />
+            {data.createdAt && <span>Created At: {getDateStringFromTimestamp(data.createdAt)}</span>} | <span>
+            <TagOutlined />&nbsp;<b>
               {data.category}
+</b>
             </span>
           <hr/>
           <p>
@@ -224,7 +225,7 @@ console.log('rows', rows)
       </Row>
       </Content>
 
-      <Sider width={500} className="white padding-small">
+      <Sider width={600} className="white padding-small">
 
       <Card title="Donate">
         <Input
@@ -232,6 +233,7 @@ console.log('rows', rows)
       className="standard-input"
       placeholder="Enter amount of donation"
       value={amount}
+      suffix="ETH"
       onChange={e => setAmount(e.target.value)}
       type="number"/>
 
@@ -259,7 +261,8 @@ console.log('rows', rows)
         navigate(`/conversations/${data.owner}`)
       }} target="_blank">Send organizer a message</a>}
       </Sider>
-      <Modal width={1200} cancelText={undefined} onOk={() => setHistoryData(undefined)} visible={historyData !== undefined} title={`Fundraiser transaction history`}>
+      <Modal     cancelButtonProps={{ style: { display: 'none' } }}
+ width={1200} cancelText={undefined} onOk={() => setHistoryData(undefined)} visible={historyData !== undefined} title={`Fundraiser transaction history`}>
         {historyData && <div>
           <h3>List of transactions against fundraiser: {data.title}</h3>
           <p>Address: {data.address}</p>
