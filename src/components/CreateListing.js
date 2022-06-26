@@ -1,32 +1,39 @@
- import React, { useState } from "react";
-import { Button, Input, Row, Col, Radio, Steps } from "antd";
+ import React, { useState, useEffect, useMemo } from "react";
+import { Button, Input, Row, Col, Radio, Steps, Card, Select } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import { signatureUrl, ipfsUrl, getExplorerUrl } from "../util";
-import { EXAMPLE_FORM } from "../util/constants";
+import { ipfsUrl, getExplorerUrl, campaignUrl } from "../util";
+import { CATEGORIES, EXAMPLE_FORM, USE_WORLD } from "../util/constants";
 import { FileDrop } from "./FileDrop/FileDrop";
 import { storeFiles } from "../util/stor";
 import { deployContract, validAddress } from "../contract/worldfundContract";
-import { useEthers } from "@usedapp/core";
+import { WorldIDComponent } from "./WorldIDComponent";
 
 const { Step } = Steps;
 
-function CreateListing(props) {
-  const {library} = useEthers()
+const {Option} = Select
+
+function CreateListing({provider, account}) {
   
-  const [data, setData] = useState({ ...EXAMPLE_FORM });
+  const [data, setData] = useState({});
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+  const [freeze, setFreeze] = useState()
   const [result, setResult] = useState();
+
+  const prefill = () => setData({...EXAMPLE_FORM})
 
   const updateData = (key, value) => {
     setData({ ...data, [key]: value });
   };
 
+  const createActionId = `${account}-${data.title || ''}`
+
   const isValid = (data) => {
     return (
       data.title &&
       data.description &&
-      data.files.length > 0 &&
+      data.category &&
+      // data.files.length > 0 &&
       validAddress(data.fundAddress)
     );
   };
@@ -42,6 +49,16 @@ function CreateListing(props) {
       return;
     }
 
+    if (USE_WORLD && data.worldId.proof) {
+      setError("World ID proof is required to continue")
+      return
+    }
+
+    if (!freeze && USE_WORLD) {
+      setError("Title must be frozen");
+      return;
+    }
+
     setLoading(true);
     const body = { ...data };
 
@@ -54,10 +71,12 @@ function CreateListing(props) {
 
     try {
       // 1) deploy base contract with metadata,
-      const contract = await deployContract(library, data.title, data.description, data.fundAddress);
+      const contract = await deployContract(provider, data.title, data.description, data.fundAddress, data.worldId && data.worldId.proof);
       // res["contract"] = contract;
-      res["address"] = contract.address
-      res["files"] = files.map(f => f.path)
+      res["address"] = contract.address;
+      res["owner"] = account;
+      res["files"] = files.map(f => f.path);
+      res["createdAt"] = new Date()
 
       const blob = new Blob([JSON.stringify(res)], { type: 'application/json' })
       const metadataFile = new File([blob], 'metadata.json')
@@ -68,7 +87,7 @@ function CreateListing(props) {
       res['cid'] = cid
 
       // 3) return shareable url.
-      res["signatureUrl"] = signatureUrl(cid);
+      res["campaignUrl"] = campaignUrl(cid);
       res["contractUrl"] = getExplorerUrl(res.address);
 
       // Result rendered after successful doc upload + contract creation.
@@ -100,48 +119,75 @@ function CreateListing(props) {
       <Row>
         <Col span={16}>
           <div className="create-form white boxed">
-            <h2>Start a new fundraise</h2>
-            <br />
+            <div>
+            <h2>Start a new fundraise campaign</h2>
+            <p>From this page you can create a new Worldfund fundraise url that can be shared with anyone on the web.&nbsp;
+            <a href="" onClick={e => {
+              e.preventDefault()
+              prefill()
+            }}>Prefill example</a>.
 
-            <h3 className="vertical-margin">Fundraise request title:</h3>
+            </p>
+</div>
+            <Card title="General information:">
             <Input
               placeholder="Title of the fundraiser"
               value={data.title}
+              className='standard-input'
               prefix="Title:"
+              disabled={freeze}
               onChange={(e) => updateData("title", e.target.value)}
             />
+              {USE_WORLD && <div>
+            <Button disabled={!account} onClick={() => setFreeze(!freeze)}>{freeze ? 'Unfreeze' : 'Freeze'}</Button>
+            <span>&nbsp;Title must be frozen to do fundraiser verification</span>
+        </div>}
             <TextArea
               aria-label="Description"
               onChange={(e) => updateData("description", e.target.value)}
               placeholder="Description of the fundraiser"
-              prefix="Description"
+              prefix="Description:"
               value={data.description}
             />
 
-            {/* TODO: add configurable amount of items */}
-            <h3 className="vertical-margin">Upload images for your fund page:</h3>
+            <p>Select category:</p>
+            <Select style={{ width: 200 }} placeholder="Select category" value={data.category} onChange={v => updateData("category", v)}>
+              {CATEGORIES.map((c, i) => {
+                return <Option key={i} value={c}>{c}</Option>
+              })}
+            </Select>
+
+</Card>
+         {/* TODO: add configurable amount of items */}
+         <Card title="Upload images for your fund page">
+            {/* <h3 className="vertical-margin">Upload images for your fund page:</h3> */}
             <FileDrop
-              files={data.files}
+              files={data.files || []}
               setFiles={(files) => updateData("files", files)}
             />
-
-            <h3 className="vertical-margin">Enter fund address:</h3>
+</Card>
+             <Card title="Enter donation address">
+            <p>Enter your desired donation address. This defaults to your current address, but can be another wallet address is you desire.</p>
             <Input
               placeholder="Wallet address to receive payments"
               value={data.fundAddress}
-              prefix="Fundraise Address:"
+              prefix="Donation Address:"
               onChange={(e) => updateData("fundAddress", e.target.value)}
             />
+</Card>
+   
             <br />
-
+            {USE_WORLD && <WorldIDComponent enabled={freeze} setProof={p => updateData("worldId", p)} actionId={createActionId} signal={account}/>}
+            <br/>
+            <br/>
             <Button
               type="primary"
-              className="standard-button"
+              className="standard-btn"
               onClick={create}
-              disabled={loading} // || !isValidData}
+              disabled={loading || !isValidData || !provider}
               loading={loading}
             >
-              Start a fundraise page!
+              {provider ? 'Create page!' : 'Login to create page'}
             </Button>
             {!error && !result && loading && (
               <span>&nbsp;Note this may take a few moments.</span>
@@ -164,7 +210,7 @@ function CreateListing(props) {
                 <p>
                   Share this url with the potential signer:
                   <br />
-                  <a href={result.signatureUrl} target="_blank">
+                  <a href={result.campaignUrl} target="_blank">
                     Open fundraise url
                   </a>
                 </p>

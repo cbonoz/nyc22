@@ -11,17 +11,23 @@ contract Worldfund is Ownable {
     string private title; // title of the worldfund contract.
     string private description; // Link to the worldfund documents to be signed.
     address private fundAddress; // Designated fund.
-    uint private goal; // Target amount to raise (optional).
+    uint private goal; // Target amount to raise (eth/optional).
+
+    string public proof;
 
     bool active;
 
     event Donated(address donater, uint amount);
 
-    constructor(string memory _title, string memory _description, address _fundAddress) {
+    constructor(string memory _title, 
+                string memory _description, 
+                address _fundAddress,
+                string memory _proof) {
         console.log("Deploying a Worldfund contract with title:", _title);
         title = _title;
         fundAddress = _fundAddress;
         description = _description;
+        proof = _proof; // Nullifier hash uniquely identifying this contract.
         active = true;
     }
 

@@ -1,25 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Input, Select, Table } from "antd";
-import { ACTIVE_CHAIN, APP_NAME, CHAIN_OPTIONS } from "../util/constants";
+import { ACTIVE_CHAIN, APP_NAME, CHAIN_OPTIONS, HISTORY_COLUMNS } from "../util/constants";
 import { getTransactions } from "../util/covalent";
-import { capitalize, col } from "../util";
+import { capitalize} from "../util";
 
 const { Option } = Select;
 
-const COLUMNS = [
-  //   col("tx_hash"),
-  //   col("from_address"),
-  col("to_address"),
-  col("value"),
-  col("gas_spent"),
-  col("block_signed_at",
-    (row) =>
-      `${new Date(row).toLocaleDateString()} ${new Date(
-        row
-      ).toLocaleTimeString()}`
-  ),
-];
 
 function History(props) {
   const [address, setAddress] = useState(
@@ -88,7 +75,7 @@ function History(props) {
           <h1>Transaction History</h1>
           <Table
             dataSource={data}
-            columns={COLUMNS}
+            columns={HISTORY_COLUMNS}
             className="pointer"
             onRow={(record, rowIndex) => {
               return {

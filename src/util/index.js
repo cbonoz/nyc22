@@ -9,7 +9,13 @@ export const ipfsUrl = (cid, fileName) => {
   return url;
 };
 
-export const signatureUrl = (cid) => `${window.location.origin}/sign/${cid}`;
+export const createMessage = (type, text, image) => ({
+  type,
+  text,
+  image
+})
+
+export const campaignUrl = (cid) => `${window.location.origin}/campaign/${cid}`;
 
 export function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -34,7 +40,7 @@ export const getDateStringFromTimestamp = (ts, showTime) => {
 };
 
 export const col = (k, render) => ({
-  title: capitalize(k),
+  title: capitalize(k).replaceAll('_', ' '),
   dataIndex: k,
   key: k,
   render,

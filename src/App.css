@@ -1,7 +1,6 @@
 @import "~antd/dist/antd.css";
+/* @import './custom.less'; */
 
-/* .App {
-} */
 
 .hero-image {
   width: 500px;
@@ -12,17 +11,53 @@
   margin-top: 150px;
 }
 
-.input {
-  max-width: 400px;
+.fund-page {
+  margin: 0 auto;
+  margin-top: 20px;
+  max-width: 1400px;
 }
 
-.centered {
-  margin: 0 auto;
+.input {
+  max-width: 400px;
 }
 
 .white {
   background: white;
 }
+
+.padding-small {
+  padding: 10px;
+}
+
+
+.header-text {
+  size: 24px;
+  font-size: 24px;
+}
+
+.cbox {
+  background: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  border-bottom: 1px dotted gray;
+  border-right: 1px dotted gray;
+}
+
+.cbox:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.green {
+  color: green
+}
+
+.float-right {
+  text-align: right;
+  float: right;
+}
+
 .boxed {
   padding: 20px;
   border-radius: 5px;
@@ -63,6 +98,14 @@
 
 .hero-slogan {
   font-size: 28px;
+}
+
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+  background: green !important;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon {
+  border: 1px solid green;
 }
 
 .vertical-margin,

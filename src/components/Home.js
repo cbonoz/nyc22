@@ -4,12 +4,12 @@ import logo from "../assets/logo_3_2_trans.png";
 import ReactRotatingText from "react-rotating-text";
 import { useNavigate } from "react-router-dom";
 import { APP_DESC } from "../util/constants";
-import { CheckCircleOutlined, CheckCircleTwoTone } from "@ant-design/icons";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 
 const CHECKLIST_ITEMS = [
-  // "Free fundraise request page hosting on IPFS",
-  // "Completed fundraises saved on Smart Contracts",
-  // "No vendor agreements required",
+  "Fundraiser donations saved on Smart Contracts.",
+  "NFTs generated for each of your early supporters",
+  "No vendor agreements required",
 ];
 
 function Home(props) {

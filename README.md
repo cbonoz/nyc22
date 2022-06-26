@@ -19,27 +19,20 @@ This app is served completely by decentralized networks.
 - Worldfund enables anyone to create and collect funds via Polygon without a vendor agreement. A polygon smart contract is deployed for each request.
 - When a donation is completed, an NFT is generated that links both the signer's signature and the documents being agreed on.
 - Hosted documents and the request are immutable.
+- If there's not a valid worldcoin proof on the contract, the donate function is blocked / prevented when attempted.
 - Smart contract deployed on Polygon which marks the progress/fulfillment of the fundraise request. 
 - When done the contract can be marked inactive by the owner.
 - View history of requests and completed fundraises using the covalent chain history API directly from the app.
 
 ### Technologies used
-Walletconnect:
-Boba network - best web2 api connection to web3.
-Tatum: Dapp platform / API (first 5 teams to submit get 500)
-Filecoin/IPFS: Storage of worlfund page assets.
-Worldcoin: Identity
-Polygon: Low cost ethereum (smart contracts)
-Livepeer: Video apps
-EPNS: Pocket network (RPC provider) 
-NFTPort: NFT creation when you donate at a certain threshold.
+* Walletconnect: Mobile-based authentication to the Worldfund application.
+* Filecoin/IPFS: Storage of worldfund page assets.
+* Worldcoin: Verifies a human is present / initiating all deploys of fundraisers on the Worldfund website. Generation of the fundraise record / proof. Attaches the final fundraise/agreement to an NFT and saves a link to it in the smart contract.
+* NFTPort: NFT creation when you donate at a certain threshold.
 Covalent: Blockchain data api (get history of donations for certain contracts, viewable in-app)
-XMTP: Messaging on the listing page.
-Unlock: Gating access to certain content
-- Covalent: Enables in-app history queries of past fundraise requests and fulfillment for a given polygon address.
-- NFTPort: Generation of the fundraise record / proof. Attaches the final fundraise/agreement to an NFT and saves a link to it in the smart contract.
-- Polygon: In-app deployment of the request smart contract and marked completed upon completion of the each request based on receival of signer's signature. A new Polygon contract is deployed for each new fundraise request.
-- Worldcoin: Identity
+* XMTP: Messaging on the listing page. Every listing page
+* Covalent: Enables in-app history queries of past fundraise requests and fulfillment for a given polygon address.
+* Polygon: In-app deployment of the request smart contract and marked completed upon completion of the each request based on receival of signer's signature. A new Polygon contract is deployed for each new fundraise request.
 
 <!--
 Demo flow:
@@ -88,4 +81,4 @@ Recompiling Worldfund contract:
 
 ### Useful links
 * Sponsors: https://showcase.ethglobal.com/ethnewyork2022/prizes
-* https://www.npmjs.com/package/@usedapp/core
+<!-- * https://www.npmjs.com/package/@usedapp/core -->
