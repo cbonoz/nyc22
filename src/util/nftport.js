@@ -5,7 +5,7 @@ export const createNFT = async (
   name,
   description,
   ownerAddress,
-  signatureData
+  imageData
 ) => {
   const params = {
     chain: "polygon",
@@ -16,8 +16,8 @@ export const createNFT = async (
 
   const formData = new FormData();
   // https://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
-  const blob = await (await fetch(signatureData)).blob();
-  const file = new File([blob], "signature.jpg", {
+  const blob = await (await fetch(imageData || 'https://images.emojiterra.com/google/android-10/512px/1f389.png')).blob();
+  const file = new File([blob], "donation.jpg", {
     type: "image/jpeg",
     lastModified: new Date(),
   });

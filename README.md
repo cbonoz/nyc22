@@ -5,7 +5,7 @@
 Worldfund
 ###
 
-Create identity-enforced fundraise pages hosted on web3, with assets and resources managed on IPFS. 
+Create free fundraiser pages powered by smart contracts, with assets and resources managed on IPFS.
 
 Payments facilitated on smart contracts.
 
@@ -14,6 +14,20 @@ This app is served completely by decentralized networks.
 
 <!-- Try it out <a href="worldfund.surge.sh" target="_blank">here</a>! (requires Metamask connected to Polygon testnet). -->
 
+### Context
+
+There's a lot of platforms that already exist to do fundraising (as well as potentially decentralized fundraising).
+
+However, these often:
+1) Charge credit card fees for every credit-card driven payment or donation
+2) Don't support anonymous donations without user accounts.
+3) Don't support crypto-based payments.
+4) Create general-purpose urls that are shareable anywhere without needing a user account.
+5) Perform human-validation to avoid robot-generated fundraise links and potentially duplicate fundraisers.
+6) Charge for active use and hosting.
+
+Worldfund is a platform for anyone to create an open fundraise page for anything that drives them.
+
 ### Benefits
 
 - Worldfund enables anyone to create and collect funds via Polygon without a vendor agreement. A polygon smart contract is deployed for each request.
@@ -21,18 +35,19 @@ This app is served completely by decentralized networks.
 - Hosted documents and the request are immutable.
 - If there's not a valid worldcoin proof on the contract, the donate function is blocked / prevented when attempted.
 - Smart contract deployed on Polygon which marks the progress/fulfillment of the fundraise request. 
-- When done the contract can be marked inactive by the owner.
+- When done the contract can be marked inactive by the owner - preventing future donations from being accepted on the contract.
 - View history of requests and completed fundraises using the covalent chain history API directly from the app.
+- Fundraise links could be posted anywhere including social media profiles.
 
 ### Technologies used
-* Walletconnect: Mobile-based authentication to the Worldfund application.
-* Filecoin/IPFS: Storage of worldfund page assets.
-* Worldcoin: Verifies a human is present / initiating all deploys of fundraisers on the Worldfund website. Generation of the fundraise record / proof. Attaches the final fundraise/agreement to an NFT and saves a link to it in the smart contract.
-* NFTPort: NFT creation when you donate at a certain threshold.
+* Walletconnect: Mobile-based authentication to the Worldfund application. Provides a deeper security layer than browser-extension alone by avoiding holding the user's private key in the browser. Enables the user to authorize contract deployments and donations from a separate device/desktop wallet while interacting with the website.
+* Filecoin/IPFS: Storage of worldfund page assets. Data and files stored on IPFS are immutable and added free of charge for the end user. When a Fundraiser page is served, an API call fetches the static metadata file and renders the content based on cid to the screen.
+* Worldcoin: Verifies a human is present / initiating all deploys of fundraisers on the Worldfund website. Generation of the fundraise record / proof. Attaches the final fundraise/agreement to an NFT and saves a link to it in the smart contract. Signal is the user's active address, while the action id is a combination of the address and the title of the current fundraiser. This 1) prevents duplicate fundraiser urls from being created or share, and 2) confirms that a human is making the page.
+* NFTPort: Offers a souvenir 'celebration' emoji NFT minted whenever a user makes a donation to a Worldfund page.
 Covalent: Blockchain data api (get history of donations for certain contracts, viewable in-app)
-* XMTP: Messaging on the listing page. Every listing page
-* Covalent: Enables in-app history queries of past fundraise requests and fulfillment for a given polygon address.
-* Polygon: In-app deployment of the request smart contract and marked completed upon completion of the each request based on receival of signer's signature. A new Polygon contract is deployed for each new fundraise request.
+* XMTP: Messaging on the listing page. Every listing page has a 'Start conversation with owner' button which pulls the owner of the fundraiser page (by address), and enables the user to open up a new chat page / dialog with them. This can be used for private communication and questions about the page. The js library was used here.
+* Covalent: Enables in-app history queries of past fundraise requests and fulfillment for a given polygon address. Each row in the app modal can be clicked and takes the user directly to the transaction explorer page for the given donation.
+* Polygon: In-app deployment of the request smart contract and emits a contract event every time a new donation is delivered to a given funraiser contract. A new Polygon contract is deployed for each new fundraise request. Polygon enables fast transactions and low cost so users can donate even small amounts without incurring large gas fee overhead.
 
 <!--
 Demo flow:
@@ -77,7 +92,7 @@ Recompiling Worldfund contract:
 
 #### Home page
 
-<img src="./img/worldfund.png" width=800 />
+<img src="./img/home.png" width=800 />
 
 ### Useful links
 * Sponsors: https://showcase.ethglobal.com/ethnewyork2022/prizes

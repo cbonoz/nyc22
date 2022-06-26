@@ -95,7 +95,7 @@ console.log('rows', rows)
 
   const { description, title, signerAddress, address: contractAddress } = data;
 
-  const sendFunds = async (signatureData) => {
+  const sendFunds = async () => {
     setError(undefined)
     let nftResults = {};
 
@@ -113,7 +113,6 @@ console.log('rows', rows)
         title,
         description,
         signerAddress,
-        signatureData
       );
       nftResults["signatureNft"] = res.data;
       const url = nftResults["transaction_external_url"];
