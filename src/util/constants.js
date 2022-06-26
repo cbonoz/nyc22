@@ -5,7 +5,7 @@ export const NFT_PORT_KEY = process.env.REACT_APP_NFT_PORT_KEY; // nft port key
 
 // Flag.
 export const USE_IPFS = true || process.env.REACT_APP_USE_IPFS;
-export const USE_WORLD = false || process.env.REACT_APP_USE_WORLD;
+export const USE_WORLD = true || process.env.REACT_APP_USE_WORLD;
 
 export const APP_NAME = "Worldfund";
 export const APP_DESC = "Create human-verified fundraise pages hosted on web3"
@@ -58,7 +58,7 @@ export const CHAIN_IDS = Object.keys(CHAIN_OPTIONS)
 // 4: { name: "rinkeby", url: "https://rinkeby.etherscan.io/tx/", id: 4 },
 
 
-export const ACTIVE_CHAIN = CHAIN_OPTIONS["42"]; // Specify active chain
+export const ACTIVE_CHAIN = CHAIN_OPTIONS["80001"]; // Specify active chain
 
 
 export const CATEGORIES = [
@@ -66,7 +66,7 @@ export const CATEGORIES = [
 ]
 
 export const EXAMPLE_FORM = {
-  title: "John Smith is looking for donations",
+  title: "Chris is looking to publish more content",
   description: "I help clients by writing motivational pieces and video content. Your donations help keep me going.",
   fundAddress: "0xD7e02fB8A60E78071D69ded9Eb1b89E372EE2292",
   files: [],

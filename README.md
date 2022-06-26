@@ -10,7 +10,6 @@ Create free fundraiser pages powered by smart contracts, with assets and resourc
 Payments facilitated on smart contracts.
 
 This app is served completely by decentralized networks.
----
 
 <!-- Try it out <a href="worldfund.surge.sh" target="_blank">here</a>! (requires Metamask connected to Polygon testnet). -->
 
@@ -48,6 +47,10 @@ Covalent: Blockchain data api (get history of donations for certain contracts, v
 * XMTP: Messaging on the listing page. Every listing page has a 'Start conversation with owner' button which pulls the owner of the fundraiser page (by address), and enables the user to open up a new chat page / dialog with them. This can be used for private communication and questions about the page. The js library was used here.
 * Covalent: Enables in-app history queries of past fundraise requests and fulfillment for a given polygon address. Each row in the app modal can be clicked and takes the user directly to the transaction explorer page for the given donation.
 * Polygon: In-app deployment of the request smart contract and emits a contract event every time a new donation is delivered to a given funraiser contract. A new Polygon contract is deployed for each new fundraise request. Polygon enables fast transactions and low cost so users can donate even small amounts without incurring large gas fee overhead.
+
+#### Change active network
+Go to constants -> `ACTIVE_CHAIN`.
+App currently has support for mumbai, polygon mainnet, and kovan (for eth network testing).
 
 <!--
 Demo flow:
@@ -103,6 +106,10 @@ Recompiling Worldfund contract:
 #### Creating a new page
 
 <img src="./img/create.png" width=800 />
+
+#### Using WalletConnect to authorize a transaction from a mobile wallet
+
+<img src="./img/wc.png" width=800 />
 
 
 #### Deploying a contract to polygon
